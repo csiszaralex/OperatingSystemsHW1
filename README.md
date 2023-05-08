@@ -1,5 +1,7 @@
 # Operating Systems first homework
 
+## 2/3 pont
+
 The Operating Systems subject on Budapest University of Technology and Economics
 
 Becsült programozási idő: >5 óra

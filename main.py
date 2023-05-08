@@ -36,7 +36,13 @@ def addToList(tik: int) -> None:
         for task in tasks:
             if task.arrive == tik:
                 if task.prior:
-                    highPriorTasks.append(task)
+                    siker = False
+                    for i in reversed(range(len(highPriorTasks))):
+                        if highPriorTasks[i].voltmar and highPriorTasks[i].arrive != task.arrive:
+                            highPriorTasks.insert(i, task)
+                            siker = True
+                            break
+                    if not siker: highPriorTasks.append(task)
                 else:
                     lowPriorTasks.append(task)
                 tasks.remove(task)
@@ -73,7 +79,7 @@ while len(highPriorTasks) != 0 or len(lowPriorTasks) != 0 or len(tasks) != 0:
         task.time -= 1
         task.wait -= 1
         order.add(task.id)
-        # print(f"{tik} - {task.id}-H ({task.time+1}->{task.time})")
+        print(f"{tik} - {task.id}-H ({task.time+1}->{task.time})")
         task.voltmar = not task.voltmar
 
         if task.time == 0:
@@ -92,7 +98,7 @@ while len(highPriorTasks) != 0 or len(lowPriorTasks) != 0 or len(tasks) != 0:
         curTask.time -= 1
         curTask.wait -= 1
         order.add(curTask.id)
-        # print(f"{tik} - {curTask.id}-L ({curTask.time+1}->{curTask.time})")
+        print(f"{tik} - {curTask.id}-L ({curTask.time+1}->{curTask.time})")
         lowPriorTasks.remove(curTask)
         wait[curTask.id] = curTask.wait
         if curTask.time != 0:
